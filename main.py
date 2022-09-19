@@ -48,7 +48,10 @@ async def hello(ctx):
 @bot.command()
 async def meow(ctx):
     print("worked")
-    await ctx.send("meow?")
+    # await ctx.send("meow?")
+    embed = discord.Embed(title="A wild cat appears...♡",     description="moew!",color=discord.Color.from_rgb(255, 192, 203))
+    embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/2865/2865755.png")
+    await ctx.send(embed=embed)
 
 
 @bot.command()
@@ -68,7 +71,9 @@ async def fact(ctx):
     response = requests.get(api_url, headers={'X-Api-Key': FA})
     if response.status_code == requests.codes.ok:
         txt = response.text
-        print(txt)
+
+        # data = json.loads(response.text)
+        # f=data['result']
 
         # await ctx.send(txt)
 
@@ -207,6 +212,27 @@ async def trivia(ctx):
             url="https://cdn-icons-png.flaticon.com/512/7967/7967969.png")
         await ctx.send(embed=embed)
 
+@bot.command()
+async def quote(ctx):
+     url = "https://quotes15.p.rapidapi.com/quotes/random/"
+
+     headers = {
+	   "X-RapidAPI-Key": RA,
+	   "X-RapidAPI-Host": "quotes15.p.rapidapi.com"
+ }
+
+     response = requests.request("GET", url, headers=headers)
+     data = json.loads(response.text)
+     q =  data['content']
+     a = data['originator']['name']
+
+     embed = discord.Embed(title="Quote from "+ a+"♡", description=q,color=discord.Color.from_rgb(255, 192, 203))
+     embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/4419/4419921.png")
+     await ctx.send(embed=embed)
+       
+
+     
+     
 bot.run(my_secret)
 
 # https://www.flaticon.com/free-icon/black-cat_8490384?term=cat&page=1&position=93&page=1&position=93&related_id=8490384&origin=search
@@ -217,3 +243,6 @@ bot.run(my_secret)
 
 # https://www.flaticon.com/free-icon/test_7967969?term=trivia&page=1&position=53&page=1&position=53&related_id=7967969&origin=search
 # https://www.flaticon.com/free-icon/stars_1391308?term=cute&page=1&position=42&page=1&position=42&related_id=1391308&origin=search
+
+# https://www.flaticon.com/free-icon/paw_2865755?term=cat&page=1&position=29&page=1&position=29&related_id=2865755&origin=search
+# https://www.flaticon.com/free-icon/message_4419921?term=quote&related_id=4419921
