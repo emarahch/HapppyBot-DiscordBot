@@ -22,7 +22,7 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
     msgL = msg.content.lower()
-    mentalL = ['suicide', 'depressed', 'anxious']
+    mentalL = ['suicide', 'depressed', 'anxious','depression','suicidal','bpd','anxiety']
     if any(x in msgL for x in mentalL):
         print('Keyword found')
         # embed = discord.Embed()
